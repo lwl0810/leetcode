@@ -9,7 +9,7 @@ https://leetcode.com/problems/add-two-numbers/
  */
 class Solution {
 public:
-
+//avoid allocate memeory for new node
 //time O(n), space O(1)
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     ListNode *dummy = new ListNode(0);
