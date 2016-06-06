@@ -1,5 +1,4 @@
 //https://leetcode.com/problems/two-sum/
-
 class Solution {
 public:
 //mantain a map to store key:the desired number, value:the index of number equals to target minus desired number
