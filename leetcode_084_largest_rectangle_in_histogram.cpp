@@ -5,6 +5,7 @@ public:
 // if the order is not ascending, pop the top one and caculate the area between the top one and current one.
 // if the stack is not empty after traverse the height vector, caculate the area between the top one and the last one in height vector.
 
+//time: O(n), space: O(n)
 int largestRectangleArea(vector<int>& heights) {
     stack<int> s;
     int res = 0, sz = heights.size();
