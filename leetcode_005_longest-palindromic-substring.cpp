@@ -47,7 +47,6 @@ string longestPalindrome(string s) {
     for (int i = 1; i < len-1; ++i) {
         int i_mirror = center - ( i - center);
         p[i] = (right > i)? min(right-i, p[i_mirror]) : 0;
-        
         //attempt to expand palindrome centered at i
         while(t[i+1+p[i]] == t[i-1-p[i]]) p[i]++;
         //if palindrome centered at i expand past R, adjust center based on expanded palindrome.
@@ -56,7 +55,6 @@ string longestPalindrome(string s) {
             right = i + p[i];
         }
     }
-    
     //find the maximum element in p.
     int maxLen = 0;
     int centerIndex = 0;
