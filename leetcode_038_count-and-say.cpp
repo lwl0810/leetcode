@@ -1,6 +1,7 @@
 //https://leetcode.com/problems/count-and-say/
 class Solution {
 public:
+//time O(n^2), space O(n)
 string countAndSay(int n) {
     string res = "1";        
     char cur = 0;
