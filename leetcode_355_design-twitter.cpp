@@ -64,6 +64,51 @@ private:
     int newsFeedNum;
 };
 
+/*
+class Twitter {
+public:
+    Twitter() {
+        newsFeedNum = 10;
+    }
+    
+    void postTweet(int userId, int tweetId) {
+        tweets.push_back(make_pair(tweetId, userId));
+        //make sure user can see userself's tweet
+        usersFollower[userId].insert(userId);
+    }
+    
+    vector<int> getNewsFeed(int userId) {
+        vector<int> res;
+        for(int i = tweets.size()-1; i >= 0; --i){
+            if(usersFollower[tweets[i].second].find(userId) != usersFollower[tweets[i].second].end()){
+                res.push_back(tweets[i].first);
+            }
+            if(res.size() == newsFeedNum) break;
+        }
+        return res;
+    }
+    
+    void follow(int followerId, int followeeId) {
+        if(followerId == followeeId) return;
+        usersFollower[followeeId].insert(followerId);
+    }
+    
+    void unfollow(int followerId, int followeeId) {
+        //user cannot unfollow userself
+        if(followerId == followeeId) return;
+        usersFollower[followeeId].erase(followerId);
+    }
+    
+private:
+    //tweets first is tweetId second is userId
+    vector<pair<int,int>> tweets;
+    unordered_map<int, deque<int>> usersNewsFeed;
+    unordered_map<int, unordered_set<int>> usersFollower;
+    int newsFeedNum;
+};
+
+*/
+
 /**
  * Your Twitter object will be instantiated and called as such:
  * Twitter obj = new Twitter();
