@@ -1,3 +1,4 @@
+//http://www.cnblogs.com/grandyang/p/5558033.html
 //Design Snake Game
 //Design a Snake game that is played on a device with screen size = width x height. Play the game online if you are not familiar with the game.
 //The snake is initially positioned at the top left corner (0,0) with length = 1 unit.
