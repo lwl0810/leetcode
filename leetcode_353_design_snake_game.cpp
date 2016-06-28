@@ -1,4 +1,4 @@
-//Design Snake Game 设计贪吃蛇游戏
+//Design Snake Game
 //Design a Snake game that is played on a device with screen size = width x height. Play the game online if you are not familiar with the game.
 //The snake is initially positioned at the top left corner (0,0) with length = 1 unit.
 //You are given a list of food's positions in row-column order. When a snake eats the food, its length and the game's score both increase by 1.
@@ -41,8 +41,21 @@
 //| | |S|
 //
 //snake.move("U"); -> Returns -1 (Game over because snake collides with border)
+class SnakeGame{
+public:
+	SnakeGame(int width, int height, vector<pair<int, int>> food);
+	~SnakeGame(void);
 
-Q353SnakeGame::Q353SnakeGame(int width, int height, vector<pair<int, int>> food){
+	int move(string direction);
+
+private:
+	int width, height, score;
+	deque<int> food;
+	deque<int> snake;
+	unordered_set<int> biteSelf;
+};
+
+SnakeGame::SnakeGame(int width, int height, vector<pair<int, int>> food){
 	this->width = width;
 	this->height = height;
 	this->score = 0;
@@ -53,11 +66,11 @@ Q353SnakeGame::Q353SnakeGame(int width, int height, vector<pair<int, int>> food)
 }
 
 
-Q353SnakeGame::~Q353SnakeGame(void){
+SnakeGame::~SnakeGame(void){
 }
 
 
-int Q353SnakeGame::move(string direction){
+int SnakeGame::move(string direction){
 	pair<int, int> head(snake.front()/width, snake.front()%width);
 	if(direction == "U") head.first--;
 	else if(direction == "D") head.first++;
