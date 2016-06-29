@@ -44,7 +44,7 @@ int dfs(const vector<vector<int>>& jump, vector<bool>& visited, int m, int n, in
 	return cnt;
 }
 
-int Q351::numberOfPatterns(int m, int n){
+int numberOfPatterns(int m, int n){
 	int res = 0;
 	vector<bool> visited(10, false);
 	vector<vector<int>> jump(10, vector<int>(10, 0));
