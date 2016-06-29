@@ -40,8 +40,8 @@ public:
             }else{
                 if((*it).isInteger()) break;
                 else{
-				    its.push((*it).getList().begin());
-				    ends.push((*it).getList().end());
+		    its.push((*it).getList().begin());
+		    ends.push((*it).getList().end());
                 }
             }
         }
