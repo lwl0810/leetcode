@@ -1,5 +1,5 @@
-//
-//Sort Transformed Array 变换数组排序
+//http://www.cnblogs.com/grandyang/p/5595614.html
+//Sort Transformed Array
 //
 //Given a sorted array of integers nums and integer values a, b and c. 
 //Apply a function of the form f(x) = ax^2 + bx + c to each element x in the array.
