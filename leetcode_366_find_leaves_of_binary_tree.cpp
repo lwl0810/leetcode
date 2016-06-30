@@ -1,6 +1,6 @@
 //http://www.cnblogs.com/grandyang/p/5616158.html
 
-//Find Leaves of Binary Tree 找二叉树的叶节点
+//Find Leaves of Binary Tree
 //Given a binary tree, find all leaves and then remove those leaves. Then repeat the previous steps until the tree is empty.
 //
 //Example:
