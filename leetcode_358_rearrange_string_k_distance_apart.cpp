@@ -19,6 +19,22 @@
 //Answer: "abacabcd"
 //Another possible answer is: "abcabcda"
 //The same letters are at least distance 2 from each other.
+struct CharItem{
+	char ch;
+	int num;
+	int preIdx;
+	CharItem(char c, int n):ch(c), num(n){preIdx = -1;}
+};
+
+class mycomp{
+public:
+	bool operator()(CharItem* a, CharItem* b){
+		if(a->num == b->num){
+			return a->preIdx > b->preIdx;
+		}
+		return a->num < b->num;
+	}
+};
 
 //time O(n), space O(n)
 string rearrangeString(string str, int k){
