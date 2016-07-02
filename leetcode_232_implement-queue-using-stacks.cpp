@@ -3,26 +3,24 @@ class Queue {
 public:
     // Push element x to the back of queue.
     void push(int x) {
-        if(empty()) front = x;
-        while(!s2.empty()){
-            s1.push(s2.top());
-            s2.pop();
-        }
+        if(s1.empty()) front = x;
         s1.push(x);
     }
 
     // Removes the element from in front of queue.
     void pop(void) {
-        while(!s1.empty()){
-            s2.push(s1.top());
-            s1.pop();
+        if(s2.empty()){
+            while(!s1.empty()){
+                s2.push(s1.top());
+                s1.pop();
+            }
         }
         s2.pop();
-        if(!empty()) front = s2.top();
     }
 
     // Get the front element.
     int peek(void) {
+        if(!s2.empty()) return s2.top();
         return front;
     }
 
