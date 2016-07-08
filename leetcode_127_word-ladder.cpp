@@ -37,4 +37,34 @@ int ladderLength(string beginWord, string endWord, unordered_set<string>& wordLi
     wordList.erase(endWord);
     return biDirectionBFS(q1, q2, wordList);
 }
+
+/*
+//BFS
+int ladderLength(string beginWord, string endWord, unordered_set<string>& wordList) {
+    int cnt = 1;
+    queue<string> q;
+    q.push(beginWord);
+    while(!q.empty()){
+        cnt++;
+        queue<string> tmp;
+        while(!q.empty()){
+            string cur = q.front();
+            q.pop();
+            for(int i = 0; i < cur.length(); ++i){
+                char ch = cur[i];
+                for(char c = 'a'; c <= 'z'; ++c){
+                    cur[i] = c;
+                    if(cur == endWord) return cnt;
+                    if(wordList.find(cur) == wordList.end()) continue;
+                    tmp.push(cur);
+                    wordList.erase(cur);
+                }
+                cur[i] = ch;
+            }
+        }
+        q = tmp;
+    }
+    return 0;
+}
+*/
 };
