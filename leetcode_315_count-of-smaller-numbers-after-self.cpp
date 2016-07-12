@@ -4,6 +4,7 @@ class Solution {
 public:
 //time O(nlogn), space O(n)
 //binary search and insert sort
+/*
 int binarySearch(vector<int>& sorts, int target){
     int start = 0, end = sorts.size()-1, mid = 0;
     while(start <= end){
@@ -26,9 +27,9 @@ vector<int> countSmaller(vector<int>& nums) {
     }
     return res;
 }
+*/
 
 //Binary Index Tree Solution
-/*
 vector<int> countSmaller(vector<int>& nums) {
     int sz = nums.size();
     //key: nums[i], value: rank
@@ -42,7 +43,7 @@ vector<int> countSmaller(vector<int>& nums) {
     }
     
     vector<int> res(sz, 0);
-    vector<int> binaryIndexTree(sz+1, 0);
+    vector<int> binaryIndexTree(idx+1, 0); //not sz+1, nums may contain duplicates
     for(int i = sz-1; i >= 0; --i){
         int rank = num2Rank[nums[i]];
         // update BIT
@@ -58,5 +59,4 @@ vector<int> countSmaller(vector<int>& nums) {
     }
     return res;
 }
-*/
 };
