@@ -26,4 +26,37 @@ vector<int> countSmaller(vector<int>& nums) {
     }
     return res;
 }
+
+//Binary Index Tree Solution
+/*
+vector<int> countSmaller(vector<int>& nums) {
+    int sz = nums.size();
+    //key: nums[i], value: rank
+    map<int, int> num2Rank;
+    for(int i = 0; i < sz; ++i){
+        num2Rank[nums[i]] = 0;
+    }
+    int idx = 0;
+    for(map<int, int>::iterator it = num2Rank.begin(); it != num2Rank.end(); ++it){
+        it->second = ++idx;
+    }
+    
+    vector<int> res(sz, 0);
+    vector<int> binaryIndexTree(sz+1, 0);
+    for(int i = sz-1; i >= 0; --i){
+        int rank = num2Rank[nums[i]];
+        // update BIT
+        for(int idx = rank; idx <= sz; idx += idx&(-idx))
+            binaryIndexTree[idx] += 1;
+        
+        // read BIT
+        int cnt = 0;
+        for(int idx = rank-1; idx > 0; idx -= idx&(-idx))
+            cnt += binaryIndexTree[idx];
+            
+        res[i] = cnt;
+    }
+    return res;
+}
+*/
 };
