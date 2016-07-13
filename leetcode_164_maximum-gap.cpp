@@ -11,7 +11,7 @@ int maximumGap(vector<int>& nums) {
         maxVal = max(maxVal, nums[i]);
     }
     //consider the test case that all the nums are the same
-    if(sz == 2 || minVal == maxVal) return abs(nums[0] - nums[1]);
+    if(minVal == maxVal) return abs(nums[0] - nums[1]);
     int bucketSize = ceil((double)(maxVal - minVal)/(sz-1));
     int bucketNum = (maxVal - minVal)/bucketSize+1;
     vector<pair<int,int>> buckets(bucketNum, make_pair(INT_MAX, INT_MIN));
