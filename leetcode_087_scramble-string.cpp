@@ -16,8 +16,8 @@ bool isScrambleHelper(string s1, string s2){
 	    if(cnt[i] != 0) return false;
 	}
 	for(int i = 1; i < sz; ++i){
-	    if(isScrambleHelper(s1.substr(0, i), s2.substr(0, i)) && isScrambleHelper(s1.substr(i), s2.substr(i))) return true;
-	    if(isScrambleHelper(s1.substr(0, i), s2.substr(sz-i)) && isScrambleHelper(s1.substr(i), s2.substr(0, sz-i))) return true;
+	    if(isScramble(s1.substr(0, i), s2.substr(0, i)) && isScramble(s1.substr(i), s2.substr(i))) return true;
+	    if(isScramble(s1.substr(0, i), s2.substr(sz-i)) && isScramble(s1.substr(i), s2.substr(0, sz-i))) return true;
 	}
 	return false;
 }
