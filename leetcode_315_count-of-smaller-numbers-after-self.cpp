@@ -1,10 +1,51 @@
 //https://leetcode.com/problems/count-of-smaller-numbers-after-self/
 
+class TNode{
+public:
+    int val;
+    int cnt; //num of node whose val <= cur->val
+    TNode* left;
+    TNode* right;
+    TNode(int v): val(v), cnt(0){left = NULL; right = NULL;}
+};
+
 class Solution {
 public:
-//time O(nlogn), space O(n)
-//binary search and insert sort
+
+//BST solution, time O(nlogn), space O(n), 89%
+int insertTNode(TNode* cur, TNode* node, int t){
+    if(cur->val < node->val){
+        if(cur->right){
+            return insertTNode(cur->right, node, cur->cnt + t + 1);
+        }else{
+            cur->right = node;
+            t += cur->cnt + 1;
+        } 
+    }else{
+        cur->cnt++;
+        if(cur->left){
+            return insertTNode(cur->left, node, t);
+        }else{
+            cur->left = node;
+        }
+    }
+    return t;
+}
+
+vector<int> countSmaller(vector<int>& nums){
+    int sz = nums.size();
+    vector<int> res(sz, 0);
+    if(sz == 0) return res;
+    TNode *root = new TNode(nums[sz-1]);
+    for(int i = sz-2; i >= 0; --i){
+        TNode *node = new TNode(nums[i]);
+        res[i] = insertTNode(root, node, 0);
+    }
+    return res;
+}
+
 /*
+//binary search and insert sort, time O(nlogn), space O(n), 50%
 int binarySearch(vector<int>& sorts, int target){
     int start = 0, end = sorts.size()-1, mid = 0;
     while(start <= end){
@@ -23,13 +64,17 @@ vector<int> countSmaller(vector<int>& nums) {
     for(int i = sz-2; i >= 0; --i){
         int idx = binarySearch(sorts, nums[i]);
         res[i] = idx;
-        sorts.insert(sorts.begin() + idx, nums[i]);
+        sorts.insert(sorts.begin()+idx, nums[i]);
+        // vector<int>::iterator it = lower_bound(sorts.begin(), sorts.end(), nums[i]);
+        // res[i] = distance(sorts.begin(), it);
+        // sorts.insert(it, nums[i]);
     }
     return res;
 }
 */
 
-//Binary Index Tree Solution
+/*
+//Binary Index Tree Solution, 29%
 vector<int> countSmaller(vector<int>& nums) {
     int sz = nums.size();
     //key: nums[i], value: rank
@@ -59,4 +104,5 @@ vector<int> countSmaller(vector<int>& nums) {
     }
     return res;
 }
+*/
 };
