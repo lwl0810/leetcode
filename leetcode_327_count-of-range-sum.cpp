@@ -2,7 +2,7 @@
 
 class BSTNode{
 public:
-    int cnt, lcnt;
+    int cnt, lcnt; //the num of nodes which have the same val, the num of nodes of its left subtree
     long val;
     BSTNode *left, *right;
     BSTNode(long v):val(v),cnt(1),lcnt(0),left(NULL),right(NULL){}
