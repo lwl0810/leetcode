@@ -25,17 +25,13 @@ int wiggleMaxLength(vector<int>& nums) {
 //dynamic programming: time O(n^2), space O(n)
 // int wiggleMaxLength(vector<int>& nums) {
 //     int sz = nums.size(), res = 0;
-//     if(sz == 0) return 0;
-//     vector<int> pos(sz, -1), neg(sz, -1);
+//     vector<int> pos(sz, 1), neg(sz, 1);
 //     for(int i = 0; i < sz; ++i){
 //         for(int j = i-1; j >= 0; --j){
 //             if(nums[j] < nums[i]) pos[i] = max(pos[i], neg[j]+1);
 //             if(nums[j] > nums[i]) neg[i] = max(neg[i], pos[j]+1); 
 //         }
-//         if(pos[i] == -1) pos[i] = 1;
-//         if(neg[i] == -1) neg[i] = 1;
-//         res = max(res, pos[i]);
-//         res = max(res, neg[i]);
+//         res = max(pos[i], neg[i]);
 //     }
 //     return res;
 // }
