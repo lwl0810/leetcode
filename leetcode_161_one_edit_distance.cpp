@@ -7,6 +7,7 @@ Given two strings S and T, determine if they are both one edit distance apart.
 
 class Solution {
 public:
+//time O(n), space O(1)
 bool isOneEditDistance(string s, string t){
 	int ls = s.length(), lt = t.length();
 	int edit = ls - lt;
