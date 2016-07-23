@@ -19,7 +19,29 @@ return the root of the binary tree [4,5,2,#,#,3,1].
   
 class Solution {
 public:
+//recursion solution
+TreeNode *upsideDownBinaryTree(TreeNode *root) {
+	TreeNode *newRoot = NULL;
+	buildUpsideDownBT(root, newRoot);
+	return newRoot;
+}
+    
+TreeNode *buildUpsideDownBT(TreeNode *root, TreeNode *&newRoot) {
+	if(!root) return root;
+	if(!root->left && !root->right) {
+		newRoot = root;
+		return root;
+	}
+	TreeNode *parent = buildUpsideDownBT(root->left, newRoot);
+	parent->left = root->right;
+	parent->right = root;
+	root->left = root->right = NULL;
+	return parent->right;
+}
+
+
 //just change the left child and root's children, right child's children are always empty
+//iteration solution
 TreeNode *upsideDownBinaryTree(TreeNode *root) {
 	TreeNode *preleft = NULL, *preright = NULL, *left, *right;
 	while(root){
