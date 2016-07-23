@@ -21,6 +21,6 @@ int lengthOfLongestSubstringTwoDistinct(string s){
 		}
 		ch = end-1;
 	}
-	return max(longest, end - start);
+	return max(longest, len - start);
 }
 };
