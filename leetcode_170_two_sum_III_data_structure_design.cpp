@@ -13,22 +13,22 @@ find(7) -> false
 
 class TwoSum {
 public:
+//Add the number to an internal data structure.
+void add(int number) {
+	um[number]++;
+}
 
-    // Add the number to an internal data structure.
-	void add(int number) {
+//Find if there exists any pair of numbers which sum is equal to the value.
+//time O(n)
+bool find(int value) {
+	for(unordered_map<int,int>::iterator it = um.begin(); it != um.end(); it++){
+		int target = value - it->first;
+		if(target != it->first && um.find(target) != um.end() || target == it->first && it->second > 1)
+			return true;
 	}
+	return false;	
+}
 
-    // Find if there exists any pair of numbers which sum is equal to the value.
-	bool find(int value) {
-	    for(auto i : d) {
-	        int j = value - i.first;
-	        if((j > i.first && d.count(j)) || (j == i.first && i.second > 1)) {
-	            return true;
-	        }
-	    }
-	    return false;
-	}
-	
 private:
-    unordered_map<int, int> d;
+    unordered_map<int, int> um;
 };
