@@ -16,11 +16,28 @@ You may assume that word1 does not equal to word2, and word1 and word2 are both 
 class WordDistance {
 public:
 WordDistance(vector<string> words){
-  
+	for(int i=0; i<words.size(); i++)
+		um[words[i]].push_back(i);
 }
 
+//time O(n), space O(n)
 int shortest(string word1, string word2){
+	int shortest = INT_MAX, i = 0, j = 0;
+	vector<int> v1 = um[word1], v2 = um[word2];
+	while(i < v1.size() && j < v2.size()){
+		if(i < j){
+			shortest = min(shortest, v2[j] - v1[i]);
+			++i;
+		}else{
+			shortest = min(shortest, v1[i] - v2[j]);
+			++j;
+		}
+	}
+	return shortest;
 }
+
+private:
+	unordered_map<string, vector<int>> um;
 };
 
 // Your WordDistance object will be instantiated and called as such:  
