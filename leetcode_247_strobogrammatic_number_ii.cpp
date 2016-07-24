@@ -21,7 +21,6 @@ void strobogrammaticHelper(vector<string>& res, string strobo, string cur, int p
 		}
 		if(isOdd){
 			for(int i = 0; i < 3; ++i){
-				if(i == 0 && len == 0) continue;
 				res.push_back(cur + strobo[i] + secHalf);
 			}
 		}else res.push_back(cur + secHalf);
