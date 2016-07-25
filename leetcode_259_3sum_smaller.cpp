@@ -12,7 +12,24 @@ Follow up: Could you solve it in O(n2) runtime?
 
 class Solution{
 public:
+//time O(n^2), space O(1)
 int threeSumSmaller(vector<int> nums, int target){
-	
+	int sz = nums.size();
+	int cnt = 0;
+	sort(nums.begin(), nums.end());
+	for(int i = 0; i < sz-2; ++i){
+		int low = i+1, high = sz-1;
+		while(low < high){
+			int sum = nums[i] + nums[low] + nums[high];
+			if(sum >= target) --high;
+			else{
+				++low; 
+				//sum from (i, low, low+1) to (i, low, high) are all smaller than target 
+				cnt += high - low;
+			}
+			
+		}	
+	}
+	return cnt;
 }
 };
