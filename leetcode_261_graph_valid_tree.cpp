@@ -17,6 +17,32 @@ Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not a
 
 class Solution{
 public:
+bool hasCycle(vector<vector<int>>& nodes, vector<bool>& isvisited){
+	stack<int> s;
+	s.push(0);
+	while(!s.empty()){
+		int cur = s.top();
+		if(isvisited[cur]) return true;
+		isvisited[cur] = true;
+		s.pop();
+		for(int i = 0; i < nodes[cur].size(); ++i){
+			if(isvisited[nodes[cur][i]]) continue;
+			s.push(nodes[cur][i]);
+		}
+	}
+	return false;
+}
+
 bool validTree(int n, vector<pair<int, int>>& edges){
+	vector<vector<int>> nodes(n);
+	for(int i = 0; i < edges.size(); ++i){
+		nodes[edges[i].first].push_back(edges[i].second);
+		nodes[edges[i].second].push_back(edges[i].first);
+	}
+	vector<bool> isvisited(n, false);
+	if(hasCycle(nodes, isvisited)) return false;
+	for(int i = 0; i < n; ++i)
+		if(!isvisited[i]) return false;
+	return true;
 }
 };
