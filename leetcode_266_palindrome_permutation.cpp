@@ -12,6 +12,14 @@ If each character occurs even number of times, then it must be a palindrome. How
 
 class Solution{
 public:
+//time O(n), space O(n)
 bool canPermutePalindrome(string s){
+	unordered_set<char> us;
+	for(int i = 0; i < s.length(); ++i){
+		if(us.find(s[i]) != us.end()) us.erase(s[i]);
+		else us.insert(s[i]);
+	}
+	if(us.size() > 1) return false;
+	return true;
 }
 };
