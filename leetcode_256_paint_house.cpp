@@ -13,7 +13,20 @@ All costs are positive integers.
 
 class Solution{
 public:
+//dynamic programming, time O(n), space O(1)
 int minCost(vector<vector<int>>& costs){
-
+	int sz = costs.size();
+	if(sz == 0) return 0;
+	int pr = costs[0][0], pb = costs[0][1], pg = costs[0][2];
+	int cr = 0, cb = 0, cg = 0;
+	for(int i = 1; i < sz; ++i){
+		cr = costs[i][0] + min(pb, pg);
+		cb = costs[i][1] + min(pr, pg);
+		cg = costs[i][2] + min(pr, pb);
+		pr = cr;
+		pb = cb;
+		pg = cg;
+	}
+	return min(cr, min(cb, cg));
 }
 };
