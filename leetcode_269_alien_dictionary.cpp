@@ -27,8 +27,10 @@ public:
 void buildGraph(vector<vector<bool>>& graph, vector<int>& preCnt, vector<string>& words){
 	for(int i = 1; i < words.size(); ++i){
 		int len1 = words[i-1].length(), len2 = words[i].length();
-		for(int j = 0; j < min(len1, len2); ++j){
-			if(words[i-1][j] == words[i][j]) continue;
+		for(int j = 0; j < max(len1, len2); ++j){
+			if(j < len1 && preCnt[words[i-1][j]-'a'] == -1) preCnt[words[i-1][j]-'a'] = 0;
+			if(j < len2 && preCnt[words[i][j]-'a'] == -1) preCnt[words[i][j]-'a'] = 0;
+			if(j >= len1 || j >= len2 || words[i-1][j] == words[i][j]) continue;
 			graph[words[i][j]-'a'][words[i-1][j]-'a'] = true;
 			preCnt[words[i][j]-'a']++;
 			break;
@@ -38,7 +40,7 @@ void buildGraph(vector<vector<bool>>& graph, vector<int>& preCnt, vector<string>
 
 string alienOrder(vector<string>& words){
 	vector<vector<bool>> graph(26, vector<bool>(26, false));
-	vector<int> preCnt(26, 0);
+	vector<int> preCnt(26, -1);
 	string res = "";
 	buildGraph(graph, preCnt, words);
 	//topological sort
