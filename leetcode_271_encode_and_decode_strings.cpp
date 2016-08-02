@@ -31,10 +31,27 @@ Do not rely on any library method such as eval or serialize methods. You should 
 class Solution{
 public:
 // Encodes a list of strings to a single string.
+//strlen + "#" + string
 string encode(vector<string>& strs) {
+	int sz = strs.size();
+	string res = "";
+	for(int i = 0; i < sz; ++i){
+		int len = strs[i].length();
+		res += to_string(len) + "#" + strs[i];
+	}
+	return res;
 }
 
 // Decodes a single string to a list of strings.
 vector<string> decode(string s) {
+	vector<string> res;
+	int i = 0, len = s.length();
+	while(i < len){
+		int pos = s.find_first_of('#', i);
+		int slen = stoi(s.substr(i, pos));
+		res.push_back(s.substr(pos+1, slen));
+		i += pos + slen + 1;
+	}
+	return res;
 }
 };
