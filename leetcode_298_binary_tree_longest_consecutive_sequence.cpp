@@ -27,6 +27,32 @@ Longest consecutive sequence path is 2-3,not 3-2-1, so return 2.
 
 class Solution{
 public:
+//consecutive sequence is in ascending order
+void top2BottomRecursion(TreeNode* root, int curLen, int& maxLen){
+	if(!root){
+		maxLen = max(maxLen, curLen);
+		return;
+	}
+	++curLen;
+	if(root->left){
+		if(root->left->val == root->val+1) top2BottomRecursion(root->left, curLen, maxLen);
+		else{
+			maxLen = max(maxLen, curLen);
+			top2BottomRecursion(root->left, 0, maxLen);
+		}
+	}
+	if(root->right){
+		if(root->right->val == root->val+1) top2BottomRecursion(root->right, curLen, maxLen);
+		else{
+			maxLen = max(maxLen, curLen);
+			top2BottomRecursion(root->right, 0, maxLen);
+		}
+	}
+}
+
 int longestConsecutive(TreeNode* root) {
+	int maxLen = 0;
+	top2BottomRecursion(root, 0, maxLen);
+	return maxLen;
 }
 };
