@@ -32,7 +32,7 @@ int shortestDistance(vector<vector<int>>& grid){
 	vector<vector<int>> totalDist(m, vector<int>(n, 0));
 	int direction[] = {0, -1, 0, 1, 0};
 	//the number of buidlings current visited, can be used to mark visited empty land in every round
-	int reachedBuildings = 0;
+	int reachedBuilding = 0;
 	for(int i = 0; i < m; ++i){
 		for(int j = 0; j < n; ++j){
 			if(grid[i][j] != 1) continue; 
@@ -48,7 +48,7 @@ int shortestDistance(vector<vector<int>>& grid){
 					q.pop();
 					for(int d = 0; d < 4; ++d){
 						int newr = r + direction[d], newc = c + direction[d+1];
-						if(newr >= 0 && newr < m && newc >= 0 && newc < n && grid[newr][newc] == reachedBuildings){
+						if(newr >= 0 && newr < m && newc >= 0 && newc < n && grid[newr][newc] == reachedBuilding){
 							q.push(make_pair(newr, newc));
 							--grid[newr][newc];
 							totalDist[newr][newc] += distance;
