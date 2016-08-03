@@ -19,6 +19,7 @@ Try to solve it in one dimension first. How can this solution apply to the two d
 //we can decompose this 2-d problem into two 1-d problems and combine (add) their solutions.
 class Solution{
 public:
+//time O(m*n) space O(m+n)
 int minTotalDistance(vector<vector<int>>& grid){
 	int m = grid.size();
 	if(m == 0) return 0;
