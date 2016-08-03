@@ -7,4 +7,17 @@ For example, given nums = [3, 5, 2, 1, 6, 4], one possible answer is [1, 6, 2, 5
 
 class Solution{
 public:
+void wiggleSort(vector<int>& nums){
+	int sz = nums.size();
+	bool down = false;
+	for(int i = 1; i < sz; ++i){
+		if(down){
+			if(nums[i] > nums[i-1]) swap(nums[i], nums[i-1]);
+			down = false;
+		}else{
+			if(nums[i] < nums[i-1]) swap(nums[i], nums[i-1]);
+			down = true;
+		}
+	}
+}
 };
