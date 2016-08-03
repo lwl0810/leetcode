@@ -28,15 +28,28 @@ isUnique("make") -> true
 
 class ValidWordAbbr {
 public:
-ValidWordAbbr(vector<string> &dictionary) {
-
+ValidWordAbbr(vector<string>& dictionary) {
+	for(int i = 0; i < dictionary.size(); ++i){
+		um[wordAbbr(dictionary[i])].insert(dictionary[i]);
+	}
 }
 
 bool isUnique(string word) {
-
+	string abbr = wordAbbr(word);
+	if(um.find(abbr) != um.end()){
+		if(um[abbr].size() > 1 || um[abbr].size() == 1 && *(um[abbr].begin()) != word) 
+			return false;
+	}
+	return true;
 }
 private:
-unordered_map<string, unordered_set<string>> mp;
+string wordAbbr(string word){
+	int len = word.length();
+	if(len <= 2) return word;
+	return word[0] + to_string(len-2) + word[len-1];
+}
+
+unordered_map<string, unordered_set<string>> um;
 };
 
 
