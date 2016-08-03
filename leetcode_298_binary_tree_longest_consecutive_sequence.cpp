@@ -29,30 +29,26 @@ class Solution{
 public:
 //consecutive sequence is in ascending order
 void top2BottomRecursion(TreeNode* root, int curLen, int& maxLen){
-	if(!root){
-		maxLen = max(maxLen, curLen);
-		return;
-	}
-	++curLen;
 	if(root->left){
-		if(root->left->val == root->val+1) top2BottomRecursion(root->left, curLen, maxLen);
+		if(root->left->val == root->val+1) top2BottomRecursion(root->left, curLen+1, maxLen);
 		else{
 			maxLen = max(maxLen, curLen);
-			top2BottomRecursion(root->left, 0, maxLen);
+			top2BottomRecursion(root->left, 1, maxLen);
 		}
 	}
 	if(root->right){
-		if(root->right->val == root->val+1) top2BottomRecursion(root->right, curLen, maxLen);
+		if(root->right->val == root->val+1) top2BottomRecursion(root->right, curLen+1, maxLen);
 		else{
 			maxLen = max(maxLen, curLen);
-			top2BottomRecursion(root->right, 0, maxLen);
+			top2BottomRecursion(root->right, 1, maxLen);
 		}
 	}
 }
 
 int longestConsecutive(TreeNode* root) {
 	int maxLen = 0;
-	top2BottomRecursion(root, 0, maxLen);
+	if(!root) return 0;
+	top2BottomRecursion(root, 1, maxLen);
 	return maxLen;
 }
 };
