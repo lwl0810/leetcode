@@ -12,6 +12,32 @@ Follow up: What if you are given k 1d vectors? How well can your code be extende
 class ZigzagIterator {
 public:
     ZigzagIterator(vector<int>& v1, vector<int>& v2) {
+		q.push(make_pair(v1.begin(), v1.end()));
+		q.push(make_pair(v2.begin(), v2.end()));
+    }
+
+    int next() {
+    	int res = 0;
+    	vector<int>::iterator cur = q.front().first, end = q.front().second;
+    	q.pop();
+    	res = *cur;
+    	if(++cur != end){
+    		q.push(make_pair(cur, end));
+    	}
+    	return res;
+    }
+
+    bool hasNext() {
+    	return !q.empty();
+    }
+private:
+	queue<pair<vector<int>::iterator, vector<int>::iterator>> q;
+};
+
+/*
+class ZigzagIterator {
+public:
+    ZigzagIterator(vector<int>& v1, vector<int>& v2) {
 		vecIdx = 0;
 		vecNum = 2;
 		vec.push_back(v1);
@@ -43,3 +69,4 @@ private:
 	vector<vector<int>::iterator> cur, end;
 	int vecIdx, vecNum;
 };
+*/
