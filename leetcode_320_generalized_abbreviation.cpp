@@ -9,5 +9,21 @@ Given word = "word", return the following list (order does not matter):
 
 class Solution{
 public:
+void genAbbr(vector<string>& res, string word, int idx) {
+	for(int j = idx; j < word.length(); ++j){
+		for(int i = 1; i + j <= word.length(); ++i){
+			string newword = word.substr(0, j) + to_string(i) + word.substr(j+i);
+			res.push_back(newword);
+			//warning: since the length of newword maybe different to word, the idx is j+i+1-(i-1)
+			genAbbr(res, newword, j+2);
+		}
+	}
+}
 
+vector<string> Q320::generateAbbreviations(string word) {
+	vector<string> res;
+	res.push_back(word);
+	genAbbr(res, word, 0);
+	return res;
+}
 };
