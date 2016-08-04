@@ -18,4 +18,25 @@ The return value is the subtree’s size, which is 3.
 
 class Solution{
 public:
+bool validateBST(TreeNode* root, int& minVal, int& maxVal, int& maxSz){
+    if(!root) return 0;
+    int lmin = INT_MAX, lmax = INT_MIN, rmin = INT_MAX, rmax = INT_MIN, lsz = 0, rsz = 0;
+    bool left = validateBST(root->left, lmin, lmax, lsz);
+    bool right = validateBST(root->right, rmin, rmax, rsz);
+    if(left == false || right == false || root->val <= lmax || root->val >= rmin){
+        maxSz = max(lsz, rsz);
+        return false;
+    }
+    maxSz = lsz + rsz + 1;
+    //left or right subtree may be null
+	maxVal = max(rmax, t->val); 
+	minVal = min(lmin, t->val);
+	return true;
+}
+
+int largestBSTSubtree(TreeNode* root){
+    int maxSz = 0, minVal = INT_MAX, maxVal = INT_MIN;
+    validateBST(root, minVal, maxVal, maxSz);
+    return maxSz;
+}
 };
