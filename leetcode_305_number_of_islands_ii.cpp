@@ -36,5 +36,41 @@ Operation #4: addLand(2, 1) turns the water at grid[2][1] into a land.
 We return the result as an array: [1, 1, 2, 3]
 */
 
+
 class Solution {
+public:
+int find(int id, vector<int>& indice) {
+	while(id != indice[id]){
+		indice[id] = indice[indice[id]];
+		id = indice[id];
+	}
+	return id;
+}
+
+//time O(klog(m*n)) space O(m*n)
+vector<int> numIslands2(int m, int n, vector<pair<int, int>>& positions) {
+	vector<int> res;
+	vector<int> indice(m*n, -1);
+	int direct[] = {0, -1, 0, 1, 0};
+	int cnt = 0;
+	for(int i = 0; i < positions.size(); ++i) {
+		++cnt;
+		int x = positions[i].first, y = positions[i].second;
+		int idx = x * n + y;
+		indice[idx] = idx;
+		for(int d = 0; d < 4; ++d) {
+			int nx = x + direct[d], ny = y + direct[d+1];
+			int nidx = nx * n + ny;
+			if(nx >= 0 && ny >= 0 && nx < m && ny < n && indice[nidx] != -1){
+				nidx = find(nidx, indice);
+				if(idx != nidx) {
+					indice[nidx] = idx;
+					cnt--;
+				}
+			}
+		}
+		res.push_back(cnt);
+	}
+	return res;
+}
 };
