@@ -16,4 +16,21 @@ Can you do it in O(n) time?
 
 class Solution{
 public:
+//time O(n), space O(n)
+int maxSubArrayLen(vector<int>& nums, int k) {
+	//key: sum from 0 to i, value: i
+	unordered_map<int, int> um;
+	int sum = 0, maxLen = 0;
+	um[0] = -1;
+	for(int i = 0; i < nums.size(); ++i){
+		sum += nums[i];
+		if(um.find(sum - k) != um.end()){
+			maxLen = max(maxLen, i - um[sum-k]);
+		}
+		if(um.find(sum) == um.end()){
+			um[sum] = i;
+		}
+	}
+	return maxLen;
+}
 };
