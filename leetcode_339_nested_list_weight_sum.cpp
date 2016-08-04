@@ -13,5 +13,19 @@ Given the list [1,[4,[6]]], return 27. (one 1 at depth 1, one 4 at depth 2, and 
 
 class Solution{
 public:
+int sumHelper(vector<NestedInteger>& nestedList, int depth) {
+	int sum = 0;
+	for(int i = 0; i < nestedList.size(); ++i){
+		if(nestedList[i].isInteger()){
+			sum += depth * nestedList[i].getInteger();
+		}else {
+			sum += sumHelper(nestedList[i].getList(), depth+1);
+		}
+	}
+	return sum;
+}
 
+int depthSum(vector<NestedInteger>& nestedList) {
+	return sumHelper(nestedList, 1);
+}
 };
