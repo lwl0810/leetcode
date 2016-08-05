@@ -28,9 +28,45 @@ Return {A,B,D}, {C,E}. Since there are two connected component which is {A,B,D},
  
 class Solution{
 public:
-//also can be solved by Union Find
+//Union Find solution
+//Union Find solution
+UndirectedGraphNode* find(unordered_map<UndirectedGraphNode*, UndirectedGraphNode*>& indice, UndirectedGraphNode* id) {
+	while(id != indice[id]) {
+		indice[id] = indice[indice[id]];
+		id = indice[id];
+	}
+	return id;
+}
+
+vector<vector<int>> Q323::connectedSet(vector<UndirectedGraphNode*>& nodes) {
+	vector<vector<int>> res;
+	unordered_map<UndirectedGraphNode*, UndirectedGraphNode*> indice;
+	for(int i = 0; i < nodes.size(); ++i)
+		indice[nodes[i]] = nodes[i];
+	for(int i = 0; i < nodes.size(); ++i) {
+		vector<UndirectedGraphNode*> ns = nodes[i]->neighbors;
+		for(int j = 0; j < ns.size(); ++j){
+			UndirectedGraphNode* nodeId = find(indice, nodes[i]);
+			UndirectedGraphNode* nsId = find(indice, ns[j]);
+			if(indice[nodeId] != indice[nsId]) {
+				indice[nsId] = indice[nodeId];
+			}
+		}
+	}
+	
+	unordered_map<UndirectedGraphNode*, vector<int>> subsets;
+	for(unordered_map<UndirectedGraphNode*, UndirectedGraphNode*>::iterator it = indice.begin(); it != indice.end(); ++it) {
+		//warning: the key is indice[it->second], not just it->second
+		subsets[indice[it->second]].push_back(it->first->label);
+	}
+	for(unordered_map<UndirectedGraphNode*, vector<int>>::iterator it = subsets.begin(); it != subsets.end(); ++it) {
+		res.push_back(it->second);
+	}
+	return res;
+}
 
 /*
+//DFS solution
 void dfs(vector<UndirectedGraphNode*>& nodes, unordered_set<UndirectedGraphNode*>& visit, 
 		vector<int>& subset, UndirectedGraphNode* cur) {
 	visit.insert(cur);
@@ -54,7 +90,7 @@ vector<vector<int>> connectedSet(vector<UndirectedGraphNode*>& nodes) {
 	}
 	return res;
 }
-*/
+
 
 //BFS solution
 vector<vector<int>> connectedSet(vector<UndirectedGraphNode*>& nodes) {
@@ -81,4 +117,5 @@ vector<vector<int>> connectedSet(vector<UndirectedGraphNode*>& nodes) {
 	}
 	return res;
 }
+*/
 };
