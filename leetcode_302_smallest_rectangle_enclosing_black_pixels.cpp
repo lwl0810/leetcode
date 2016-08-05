@@ -1,19 +1,21 @@
 //http://www.cnblogs.com/EdwardLiu/p/5084577.html
-//Smallest Rectangle Enclosing Black Pixels
-//An image is represented by a binary matrix with 0 as a white pixel and 1 as a black pixel. 
-//The black pixels are connected, i.e., there is only one black region. 
-//Pixels are connected horizontally and vertically. 
-//Given the location (x, y) of one of the black pixels, 
-//return the area of the smallest (axis-aligned) rectangle that encloses all black pixels.
-//For example, given the following image:
-//[
-//  "0010",
-//  "0110",
-//  "0100"
-//]
-//and x = 0, y = 2,
-//Return 6.
-
+/*
+Smallest Rectangle Enclosing Black Pixels
+An image is represented by a binary matrix with 0 as a white pixel and 1 as a black pixel. 
+The black pixels are connected, i.e., there is only one black region. 
+Pixels are connected horizontally and vertically. 
+Given the location (x, y) of one of the black pixels, 
+return the area of the smallest (axis-aligned) rectangle that encloses all black pixels.
+For example, given the following image:
+[
+ "0010",
+ "0110",
+ "0100"
+]
+and x = 0, y = 2,
+Return 6.
+*/
+class Solution {
 bool findBlack(vector<vector<char>>& image, int m, bool isrow){
 	int row=image.size(), col=image[0].size();
 	if(isrow){
@@ -69,7 +71,7 @@ int searchBottom(vector<vector<char>>& image, int x){
 }
 
 
-int Q302::minArea(vector<vector<char>>& image, int x, int y){
+int minArea(vector<vector<char>>& image, int x, int y){
 	int row=image.size();
 	if(row==0)return 0;
 	int col=image[0].size();
@@ -79,3 +81,4 @@ int Q302::minArea(vector<vector<char>>& image, int x, int y){
 	int bottom=searchBottom(image, x);
 	return (right-left+1)*(bottom-top+1);
 }
+};
