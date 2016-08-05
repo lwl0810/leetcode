@@ -73,7 +73,9 @@ public:
     }
     
 private:
-	vector<int> recycle;
-	vector<bool> isAssigned;
-	int numIdx, recycleIdx, maxNum;
+	vector<int> recycle;		//maintain the recycled num
+	vector<bool> isAssigned;  	//mark the assigned status
+	int num;			//the current available num
+	int recycleIdx;			//the index of current available recycled num
+	int maxNum;
 };
