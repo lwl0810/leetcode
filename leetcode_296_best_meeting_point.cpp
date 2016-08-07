@@ -46,4 +46,40 @@ int minTotalDistance(vector<vector<int>>& grid){
 	}
 	return distance;
 }
+
+
+//if the meeting point must be in someone's home
+//https://discuss.leetcode.com/topic/51109/8ms-c-dp-solution-with-o-mn-time-o-m-n-space
+int minTotalDistance(vector<vector<int>>& grid){
+	int m = grid.size();
+	if(m == 0) return 0;
+	int n = grid[0].size();
+	int rdistance = 0, cdistance = 0;
+	int rowSum[m] = {0}, colSum[n] = {0};
+	for(int i = 0; i < m; ++i){
+		if(rowSum[i] != 0) rowSum = rowSum[i-1];
+		for(int j = 0; j < n; ++j){
+			rowSum[i] += grid[i][j];
+			colSum[j] += (i == 0? rowSum[i]: rowSum[i]-rowSum[i-1]);
+			rdistance += grid[i][j] * j;
+			cdistance += grid[i][j] * i;
+		}
+	}
+	
+	int reduced = 0; //the distance reduced of each move, when reduced >= 0, no need to continue 
+	int i = 0, j = 0; //the meeting point, when for loop finished, i and j is the best meeting point;
+	for(i = 0; i < m-1; ++i) {
+		reduced = rowSum[i] - (rowSum[m-1] - rowSum[i]);
+		if(reduced >= 0) break;
+		rdistance += reduced;
+	}
+	for(j = 0; j < n-1; ++j) {
+		reduced = colSum[j] - (colSum[n-1] - colSum[j]);
+		if(reduced >= 0) break;
+		cdistance += reduced;
+	}
+	return rdistance + cdistance;
+}
 };
+
+
