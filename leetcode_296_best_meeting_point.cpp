@@ -49,6 +49,7 @@ int minTotalDistance(vector<vector<int>>& grid){
 
 
 //if the meeting point must be in someone's home
+//https://discuss.leetcode.com/topic/27722/o-mn-java-2ms
 //https://discuss.leetcode.com/topic/51109/8ms-c-dp-solution-with-o-mn-time-o-m-n-space
 int minTotalDistance(vector<vector<int>>& grid){
 	int m = grid.size();
